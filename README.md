@@ -10,3 +10,4 @@ Follow below commands to use this library:
 5. react-native run-android / react-native run-ios.
 
 Please let me know if you found any difficulties to run.
+
