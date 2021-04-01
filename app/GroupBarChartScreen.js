@@ -17,30 +17,30 @@ class StackedBarChartScreen extends React.Component {
       legend: {
         enabled: true,
         textSize: 14,
-        form: 'CIRCLE',
+        form: "CIRCLE",
         formSize: 14,
         xEntrySpace: 30,
         yEntrySpace: 0,
         wordWrapEnabled: true,
         formToTextSpace: 10,
-        horizontalAlignment: 'CENTER',
+        horizontalAlignment: "CENTER",
       },
       data: {
         dataSets: [
           {
             values: [125, 110, 135, 140, 130, 160, 170],
-            label: 'Systolic',
+            label: "Systolic",
             config: {
               drawValues: true,
-              colors: [processColor('#E4B81D')],
+              colors: [processColor("#E4B81D")],
             },
           },
           {
             values: [80, 75, 60, 85, 90, 95, 105],
-            label: 'Diastolic',
+            label: "Diastolic",
             config: {
               drawValues: true,
-              colors: [processColor('#4166C8')],
+              colors: [processColor("#4166C8")],
             },
           },
         ],
@@ -54,18 +54,48 @@ class StackedBarChartScreen extends React.Component {
         },
       },
       xAxis: {
-        valueFormatter: ['1 Apr', '2 Apr', '3 Apr', '4 Apr', '5 Apr','6 Apr', '7 Apr'],
+        valueFormatter: [
+          "1 Apr",
+          "2 Apr",
+          "3 Apr",
+          "4 Apr",
+          "5 Apr",
+          "6 Apr",
+          "7 Apr",
+        ],
         granularityEnabled: true,
         granularity: 1,
         axisMaximum: 7,
         axisMinimum: 0,
         centerAxisLabels: true,
-        position: 'BOTTOM',
+        position: "BOTTOM",
         avoidFirstLastClipping: true,
       },
 
-      yAxis: {left:{axisMinimum: 0, axisMaximum: 240, drawAxisLines: false,drawGridLines: false}, right:{axisMinimum: 0, axisMaximum: 0}},
-
+      yAxis: {
+        left: {
+          axisMinimum: 0,
+          axisMaximum: 240,
+          drawAxisLines: false,
+          drawGridLines: false,
+          limitLines: [{
+            label: 'Upper limit',
+            limit: 160,
+            lineWidth: 2,
+            labelPosition: 'LEFT_TOP',
+            valueTextColor: processColor('red'),
+            lineColor: processColor('red'),
+          }, {
+            label: 'Lower limit',
+            limit: 75,
+            lineWidth: 2,
+            labelPosition: 'RIGHT_BOTTOM',
+            valueTextColor: processColor('red'),
+            lineColor: processColor('green'),
+          }]
+        },
+        right: { axisMinimum: 0, axisMaximum: 0 },
+      },
     };
   }
 
