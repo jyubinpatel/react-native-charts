@@ -33,23 +33,41 @@ class AxisLineChartScreen extends React.Component {
       update(this.state, {
         xAxis: {
           $set: {
+            valueFormatter: [
+              "8 AM",
+              "8:30 AM",
+              "9 AM",
+              "9:30 AM",
+              "10:00 AM",
+              "10:30 AM",
+              "11:00 AM",
+            ],
+            labelRotationAngle: 60,
+            granularityEnabled: true,
+            granularity: 1,
+            axisMaximum: 7,
+            axisMinimum: 0,
+            centerAxisLabels: true,
+            position: "BOTTOM",
+            avoidFirstLastClipping: true,
             textColor: processColor('red'),
-            textSize: 16,
+            textSize: 14,
             gridColor: processColor('red'),
-            gridLineWidth: 1,
+            gridLineWidth: 0.5,
             axisLineColor: processColor('darkgray'),
-            axisLineWidth: 1.5,
+            axisLineWidth: 1,
             gridDashedLine: {
               lineLength: 10,
               spaceLength: 10
             },
             avoidFirstLastClipping: true,
-            position: 'BOTTOM'
           }
         },
         yAxis: {
           $set: {
             left: {
+              axisMinimum: 0,
+              axisMaximum: 140,
               drawGridLines: false
             },
             right: {
@@ -63,6 +81,7 @@ class AxisLineChartScreen extends React.Component {
               values: this._randomYValues(valueRange, size),
               label: '',
               config: {
+                mode: 'CUBIC_BEZIER',
                 lineWidth: 1.5,
                 drawCircles: false,
                 drawCubicIntensity: 0.3,
@@ -81,7 +100,7 @@ class AxisLineChartScreen extends React.Component {
   }
 
   _randomYValues(range: number, size: number) {
-    const nextValueMaxDiff = 0.2;
+    const nextValueMaxDiff = 0.8;
     let lastValue = range / 2;
 
     return _.times(size, () => {
@@ -132,7 +151,8 @@ class AxisLineChartScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
+    paddingBottom: 20,
   },
   chart: {
     flex: 1

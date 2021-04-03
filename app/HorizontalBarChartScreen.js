@@ -16,36 +16,84 @@ class HorizontalBarChartScreen extends React.Component {
 
     this.state = {
       legend: {
-        enabled: true,
+        enabled: false,
+        xEntrySpace: 20,
+        yEntrySpace: 10,
         textSize: 14,
-        form: 'SQUARE',
+        form: "CIRCLE",
         formSize: 14,
-        xEntrySpace: 10,
-        yEntrySpace: 5,
-        formToTextSpace: 5,
-        wordWrapEnabled: true,
-        maxSizePercent: 0.5,
+        formToTextSpace: 10,
+        horizontalAlignment: "CENTER",
       },
       data: {
-        dataSets: [{
-          values: [{y: 100}, {y: 105}, {y: 102}, {y: 110}, {y: 114}, {y: 109}, {y: 105}, {y: 99}, {y: 95}],
-          label: 'Bar dataSet',
-          config: {
-            color: processColor('teal'),
-            barShadowColor: processColor('lightgrey'),
-            highlightAlpha: 90,
-            highlightColor: processColor('red'),
-          }
-        }],
+          dataSets: [
+            {
+              values: [200, 155, 90, 185, 290, 395, 150],
+              label: "Random",
+              config: {
+                drawValues: false,
+                colors: [processColor('#34BDE6')],
+              },
+          },
+          {
+            values: [125, 110, 135, 140, 130, 160, 170],
+            label: "Post Meal",
+            config: {
+              drawValues: false,
+              colors: [processColor('#4167C8')],
+            },
+          },
+          {
+            values: [100,105,102,110,114,109,105],
+            label: "Fasting",
+            config: {
+              drawValues: false,
+              color: processColor('#E4B81D'),
+            }
+          },
+        ],
+        config: {
+          barWidth: 0.25,
+          group: {
+            fromX: 0,
+            groupSpace: 0.25,
+            barSpace: 0,
+          },
+        },
       },
       xAxis: {
-        valueFormatter: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+        valueFormatter: ['1 Apr', '2 Apr', '3 Apr', '4 Apr', '5 Apr', '6 Apr', '7 Apr'],
         position: 'BOTTOM',
         granularityEnabled: true,
         granularity: 1,
-        labelCount: 10,
+        axisMaximum: 7,
+        axisMinimum: 0,
+        centerAxisLabels: true,
+        avoidFirstLastClipping: true,
+        drawAxisLines: false,
+        drawGridLines: false,
       },
-      yAxis: {left:{axisMinimum: 0}}
+      yAxis: {
+        right:
+        {
+          enabled: true,
+          granularityEnabled: true,
+          axisMinimum: 0,
+          axisMaximum: 500,
+          granularity: 50,
+          centerAxisLabels: true,
+          drawAxisLines: true,
+          drawGridLines: true,
+          avoidFirstLastClipping: true,
+        },
+        left: {
+          enabled: false,
+          granularityEnabled: true,
+          axisMinimum: 0,
+          axisMaximum: 500,
+          granularity: 50,
+        }
+     }
     };
   }
 
@@ -77,14 +125,20 @@ class HorizontalBarChartScreen extends React.Component {
             data={this.state.data}
             xAxis={this.state.xAxis}
             yAxis={this.state.yAxis}
-            animation={{durationX: 2000}}
+            animation={{durationX: 1000}}
             legend={this.state.legend}
-            gridBackgroundColor={processColor('#ffffff')}
+            drawGridBackground={true}
+            gridBackgroundColor={processColor('#fff')}
             drawBarShadow={false}
-            drawValueAboveBar={true}
-            drawHighlightArrow={true}
+            drawValueAboveBar={false}
+            drawHighlightArrow={false}
             onSelect={this.handleSelect.bind(this)}
             onChange={(event) => console.log(event.nativeEvent)}
+            highlightPerTapEnabled={false}
+            highlightPerDragEnabled={false}
+            pinchZoom={false}
+            doubleTapToZoomEnabled={false}
+            chartDescription={{text:''}}
           />
         </View>
       </View>
@@ -98,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF'
   },
   chart: {
-    flex: 1
+    flex: 0.7,
   }
 });
 
